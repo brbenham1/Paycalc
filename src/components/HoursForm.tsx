@@ -13,15 +13,21 @@ export default function HoursForm() {
 					<label className="mr-2">Finish Time:</label>
 					<input type="text" name="finishTime" />
 				</div>
-				<div>
+				<div className="mb-2">
 					<label className="mr-2">Day of the week: </label>
 					<input type="text" name="dayOfWeek" />
 				</div>
-				<div>
+				<div className="mb-2">
 					<label className="mr-2">Public Holiday </label>
 					<input type="checkbox" name="publicHoliday" />
 				</div>
 			</form>
+
+			<div>
+				<button className="rounded-2xl bg-white p-2 shadow-md hover:bg-red-400">
+					Add Shift
+				</button>
+			</div>
 		</div>
 	);
 }
