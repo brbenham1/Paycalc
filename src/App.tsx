@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import HoursForm from './HoursForm';
-import SummaryOutput from './SummaryOutput';
+import HoursForm from './components/HoursForm';
+import SummaryOutput from './components/SummaryOutput';
 
 function App() {
 	const [count, setCount] = useState(0);
