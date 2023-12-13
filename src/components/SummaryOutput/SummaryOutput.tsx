@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function SummaryOutput() {
 	return (
 		<div className="w-2/5 bg-red-400 p-4">
