@@ -61,6 +61,7 @@ export default function HoursForm() {
 					{shifts.map((shift, index) => (
 						<ShiftDetails
 							key={index}
+							index={index}
 							shiftData={shift}
 							onRemove={() => removeShift(index)}
 							onUpdate={(updatedShift) => updateShift(index, updatedShift)}

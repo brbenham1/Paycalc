@@ -10,9 +10,10 @@ type ShiftDetailsProps = {
 	onRemove: () => void;
 	onUpdate: (updatedShift: ShiftInformation) => void;
 	shiftData: ShiftInformation;
+	index: number;
 };
 
-export default function ShiftDetails({ onRemove, onUpdate, shiftData }: ShiftDetailsProps) {
+export default function ShiftDetails({ onRemove, onUpdate, shiftData, index }: ShiftDetailsProps) {
 	const handleInputChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
 		field: keyof ShiftInformation
@@ -25,6 +26,16 @@ export default function ShiftDetails({ onRemove, onUpdate, shiftData }: ShiftDet
 
 	const handleAutoCompleteChange = (value: string) => {
 		onUpdate({ ...shiftData, dayOfTheWeek: value });
+	};
+
+	const confirmRemove = () => {
+		// if the values are not empty, ask for confirmation
+		if (shiftData.dayOfTheWeek || shiftData.startTime || shiftData.endTime) {
+			if (!window.confirm('Are you sure you want to remove this shift?')) {
+				return;
+			}
+		}
+		onRemove();
 	};
 
 	useEffect(() => {
@@ -47,11 +58,15 @@ export default function ShiftDetails({ onRemove, onUpdate, shiftData }: ShiftDet
 	}, [shiftData]);
 
 	return (
-		<div className="relative rounded-xl bg-gray-200">
-			<button className="btn btn-circle btn-ghost btn-sm absolute right-1 top-1" onClick={onRemove}>
+		<div className="relative rounded-xl bg-gray-200 p-3">
+			<button
+				className="btn btn-circle btn-ghost btn-sm absolute right-1 top-1"
+				onClick={confirmRemove}
+			>
 				<FontAwesomeIcon icon={faXmark} className="fa-lg" />
 			</button>
-			<form className="p-2">
+			<h2 className="text-xl font-semibold">Shift #{index + 1}</h2>
+			<form>
 				<label className="form-control max-w-md">
 					<div className="label">
 						<div className="grid grid-flow-col items-center gap-2">
