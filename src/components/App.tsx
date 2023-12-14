@@ -1,5 +1,5 @@
-import HoursForm from './components/HoursForm/HoursForm';
-import SummaryOutput from './components/SummaryOutput/SummaryOutput';
+import HoursForm from './HoursForm/HoursForm';
+import SummaryOutput from './SummaryOutput/SummaryOutput';
 
 function App() {
 	return (
