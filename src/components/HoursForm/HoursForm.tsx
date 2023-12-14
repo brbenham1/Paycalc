@@ -26,7 +26,7 @@ export default function HoursForm() {
 		<div className="flex h-screen flex-1 flex-col items-center overflow-auto bg-gray-50 p-4">
 			<div className="w-96">
 				<div className="flex w-full justify-between">
-					<h1 className="mb-4 text-3xl font-semibold">Work Hours</h1>
+					<h1 className="mb-4 text-4xl font-semibold">Work Hours</h1>
 					<div>
 						<button onClick={addShift} className="btn btn-primary btn-md">
 							<FontAwesomeIcon icon={faPlus} />
