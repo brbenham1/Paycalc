@@ -1,5 +1,9 @@
 import { ShiftInformation } from '../contexts/ShiftContext';
 
+const BASE_RATE = parseFloat(import.meta.env.VITE_BASE_RATE);
+const SATURDAY_RATE = parseFloat(import.meta.env.VITE_SATURDAY_RATE);
+const SUNDAY_RATE = parseFloat(import.meta.env.VITE_SUNDAY_RATE);
+
 type DerivedShiftInfo = ShiftInformation & {
 	duration: string;
 	earnings: number;
@@ -24,9 +28,24 @@ export function getDerivedShiftInfo(shift: ShiftInformation): DerivedShiftInfo {
 
 export function shiftToPay(shift: ShiftInformation): number {
 	const { hours, minutes } = getHoursAndMinutesBetween(shift.startTime, shift.endTime);
-	const rate = 29.5;
+	const rate = getRate(shift);
 	return hours * rate + (minutes / 60) * rate;
 }
+
+export const getRate = (shift: ShiftInformation): number => {
+	const day = shift.dayOfTheWeek;
+	if (day === 'Sunday') {
+		return SUNDAY_RATE;
+	}
+	if (day === 'Saturday') {
+		return SATURDAY_RATE;
+	}
+	if (shift.publicHoliday) {
+		return BASE_RATE * 2;
+	}
+
+	return BASE_RATE;
+};
 
 export const timeStringToDate = (time: string): Date => {
 	const [h, m] = time.split(':').map(Number);
