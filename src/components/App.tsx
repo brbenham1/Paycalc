@@ -1,12 +1,15 @@
+import { ShiftDataProvider } from '../contexts/ShiftContext';
 import HoursForm from './HoursForm/HoursForm';
 import SummaryOutput from './SummaryOutput/SummaryOutput';
 
 function App() {
 	return (
-		<div className="flex w-full bg-green-400">
-			<HoursForm />
-			<SummaryOutput />
-		</div>
+		<ShiftDataProvider>
+			<div className="flex w-full bg-green-400">
+				<HoursForm />
+				<SummaryOutput />
+			</div>
+		</ShiftDataProvider>
 	);
 }
 

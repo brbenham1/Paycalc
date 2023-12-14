@@ -1,8 +1,8 @@
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faChampagneGlasses, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ShiftInformation } from '../HoursForm/HoursForm';
-import { DaysOfWeek, DaysOfWeekArray } from '../../types/constants';
+import { ShiftInformation } from '../../contexts/ShiftContext';
+import { DaysOfWeek, DaysOfWeekArray } from '../../utils/daysOfWeek';
 import AutoComplete from '../AutoComplete/AutoComplete';
 import { useEffect, useState } from 'react';
 
@@ -88,7 +88,7 @@ export default function ShiftDetails({ onRemove, onUpdate, shiftData, index }: S
 						<input
 							type="time"
 							className="input input-bordered w-40"
-							value={shiftData.startTime}
+							value={shiftData.startTime?.toString() ?? ''}
 							onChange={(e) => handleInputChange(e, 'startTime')}
 						/>
 					</label>

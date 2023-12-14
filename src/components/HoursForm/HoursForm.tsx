@@ -1,47 +1,25 @@
-import { useState } from 'react';
 import ShiftDetails from '../ShiftDetails/ShiftDetails';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
-export type ShiftInformation = {
-	startTime: string;
-	endTime: string;
-	dayOfTheWeek: string;
-	publicHoliday: boolean;
-};
+import { ShiftInformation, useShiftData } from '../../contexts/ShiftContext';
 
 export default function HoursForm() {
-	const [shifts, setShifts] = useState<ShiftInformation[]>([
-		{
-			startTime: '',
-			endTime: '',
-			dayOfTheWeek: '',
-			publicHoliday: false
-		}
-	]);
+	const { shiftData: shifts, updateShiftData: setShifts } = useShiftData();
 
 	function addShift() {
-		setShifts([
-			...shifts,
-			{
-				startTime: '',
-				endTime: '',
-				dayOfTheWeek: '',
-				publicHoliday: false
-			}
-		]);
+		setShifts([...shifts, { startTime: '', endTime: '', dayOfTheWeek: '', publicHoliday: false }]);
 	}
 
 	const updateShift = (indexToUpdate: number, updatedShift: ShiftInformation) => {
-		setShifts((currentDays) =>
-			currentDays.map((shift, index) =>
-				index === indexToUpdate ? { ...shift, ...updatedShift } : shift
-			)
+		const updatedShifts = shifts.map((shift, index) =>
+			index === indexToUpdate ? { ...shift, ...updatedShift } : shift
 		);
+		setShifts(updatedShifts);
 	};
 
 	const removeShift = (indexToRemove: number) => {
-		setShifts((currentDays) => currentDays.filter((_, index) => index !== indexToRemove));
+		const updatedShifts = shifts.filter((_, index) => index !== indexToRemove);
+		setShifts(updatedShifts);
 	};
 
 	return (
