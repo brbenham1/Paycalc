@@ -28,22 +28,21 @@ export default function HoursForm() {
 	}
 
 	return (
-		<div className="flex flex-1 flex-col bg-blue-400 p-4">
-			<h1 className="text-3xl font-bold">Work Hours</h1>
+		<div className="bg-base-100 flex flex-1 flex-col justify-between p-4">
+			<a className="flex justify-between pb-4">
+				<h1 className="ml-4 text-3xl font-bold">Work Hours</h1>
+				<button
+					className="btn btn-primary mr-4 self-center rounded-lg"
+					onClick={addShift}
+				>
+					+ Add Shift
+				</button>
+			</a>
 
 			<div className="grid grid-cols-1 gap-2">
 				{days.map((day) => (
 					<ShiftDetails />
 				))}
-			</div>
-
-			<div>
-				<button
-					onClick={addShift}
-					className="rounded-2xl bg-white p-2 shadow-md hover:bg-red-400"
-				>
-					Add Shift
-				</button>
 			</div>
 		</div>
 	);
