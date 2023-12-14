@@ -1,7 +1,10 @@
-import { faCalendar, faClock } from '@fortawesome/free-regular-svg-icons';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { faChampagneGlasses, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ShiftInformation } from '../HoursForm/HoursForm';
+import { DaysOfWeek, DaysOfWeekArray } from '../../types/constants';
+import AutoComplete from '../AutoComplete/AutoComplete';
+import { useEffect, useState } from 'react';
 
 type ShiftDetailsProps = {
 	onRemove: () => void;
@@ -18,6 +21,31 @@ export default function ShiftDetails({ onRemove, onUpdate, shiftData }: ShiftDet
 		onUpdate({ ...shiftData, [field]: updatedValue });
 	};
 
+	const [dayDropdownItems, setDayDropdownItems] = useState<DaysOfWeek[]>([]);
+
+	const handleAutoCompleteChange = (value: string) => {
+		onUpdate({ ...shiftData, dayOfTheWeek: value });
+	};
+
+	useEffect(() => {
+		if (!shiftData.dayOfTheWeek) {
+			setDayDropdownItems(DaysOfWeekArray);
+			return;
+		}
+
+		const filteredCountries = DaysOfWeekArray.filter((country) =>
+			country.toLowerCase().includes(shiftData.dayOfTheWeek.toLowerCase())
+		);
+
+		// if the filtered list only has one item don't show the dropdown
+		if (filteredCountries.length === 1 && filteredCountries[0] === shiftData.dayOfTheWeek) {
+			setDayDropdownItems([]);
+			return;
+		}
+
+		setDayDropdownItems(filteredCountries);
+	}, [shiftData]);
+
 	return (
 		<div className="relative rounded-xl bg-gray-200">
 			<button className="btn btn-circle btn-ghost btn-sm absolute right-1 top-1" onClick={onRemove}>
@@ -31,41 +59,31 @@ export default function ShiftDetails({ onRemove, onUpdate, shiftData }: ShiftDet
 							<FontAwesomeIcon icon={faCalendar} />
 						</div>
 					</div>
-					<input
-						type="text"
-						placeholder="Monday"
-						className="input input-bordered max-w-md"
+					<AutoComplete
 						value={shiftData.dayOfTheWeek}
-						onChange={(e) => handleInputChange(e, 'dayOfTheWeek')}
+						onChange={handleAutoCompleteChange}
+						items={dayDropdownItems}
 					/>
 				</label>
 				<div className="grid grid-flow-col gap-4">
-					<label className="form-control max-w-xs">
+					<label className="form-control">
 						<div className="label">
-							<div className="grid grid-flow-col items-center gap-2">
-								<span className="label-text">Start Time</span>
-								<FontAwesomeIcon icon={faClock} />
-							</div>
+							<span className="label-text">Start Time</span>
 						</div>
 						<input
-							type="text"
-							placeholder="12pm"
-							className="input input-bordered max-w-xs"
+							type="time"
+							className="input input-bordered w-40"
 							value={shiftData.startTime}
 							onChange={(e) => handleInputChange(e, 'startTime')}
 						/>
 					</label>
-					<label className="form-control max-w-xs">
+					<label className="form-control">
 						<div className="label">
-							<div className="grid grid-flow-col items-center gap-2">
-								<span className="label-text">End Time</span>
-								<FontAwesomeIcon icon={faClock} />
-							</div>
+							<span className="label-text">End Time</span>
 						</div>
 						<input
-							type="text"
-							placeholder="7pm"
-							className="input input-bordered max-w-xs"
+							type="time"
+							className="input input-bordered w-40"
 							value={shiftData.endTime}
 							onChange={(e) => handleInputChange(e, 'endTime')}
 						/>
