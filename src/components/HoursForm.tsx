@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ShiftDetails from './ShiftDetails';
 
-type ShiftInformation = {
+export type ShiftInformation = {
 	startTime: string;
 	endTime: string;
 	dayOfTheWeek: string;
@@ -27,8 +27,23 @@ export default function HoursForm() {
 		);
 	}
 
+	const removeShift = (indexToRemove: number) => {
+		const updatedShifts = shifts.filter((_, index) => index !== indexToRemove);
+		setShifts(updatedShifts);
+	};
+
+	const updateShift = (
+		indexToUpdate: number,
+		updatedShift: ShiftInformation
+	) => {
+		const updatedShifts = shifts.map((shift, index) =>
+			index === indexToUpdate ? { ...shift, ...updatedShift } : shift
+		);
+		setShifts(updatedShifts);
+	};
+
 	return (
-		<div className="bg-base-100 flex flex-1 flex-col justify-between p-4">
+		<div className="flex h-screen flex-1 flex-col overflow-y-scroll bg-base-100 p-4">
 			<div className="flex justify-between pb-4">
 				<h1 className="text-3xl font-bold">Work Hours</h1>
 				<button
@@ -39,8 +54,13 @@ export default function HoursForm() {
 				</button>
 			</div>
 			<div className="flex flex-col items-center gap-4">
-				{shifts.map((day) => (
-					<ShiftDetails />
+				{shifts.map((shift, index) => (
+					<ShiftDetails
+						shiftData={shift}
+						key={index}
+						onUpdate={(updatedShift) => updateShift(index, updatedShift)}
+						onRemove={() => removeShift(index)}
+					/>
 				))}
 			</div>
 		</div>
