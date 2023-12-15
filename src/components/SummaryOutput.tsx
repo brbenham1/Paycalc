@@ -1,30 +1,35 @@
 import React from 'react';
+import { ShiftInformation, useShiftData } from '../context/ShiftContext';
 
 export default function SummaryOutput() {
-	return (
-		<div className="w-2/5 bg-base-200 p-4">
-			<h1 className="text-3xl font-bold">Summary</h1>
+	const { shiftData, updateShiftData } = useShiftData();
 
-			<div className="mb-2">
-				<p className="mr-2">Monday | 8 hours | $54.21</p>
-			</div>
-			<div className="mb-2">
-				<p className="mr-2">Tuesday | 3 hours | $54.21</p>
-			</div>
-			<div className="mb-2">
-				<p className="mr-2">Wednesday | 0 hours | $0.00</p>
-			</div>
-			<div className="mb-2">
-				<p className="mr-2">Thursday | 0 hours | $0.00</p>
-			</div>
-			<div className="mb-2">
-				<p className="mr-2">Friday | 0 hours | $0.00</p>
-			</div>
-			<div className="mb-2">
-				<p className="mr-2">Saturday | 0 hours | $0.00</p>
-			</div>
-			<div className="mb-2">
-				<p className="mr-2">Sunday | 0 hours | $0.00</p>
+	// const add = () => {};
+
+	return (
+		<div className="w-2/5 bg-base-100 p-4">
+			<h1 className="pb-4 text-3xl font-bold">Summary</h1>
+
+			<div className="grid grid-flow-row gap-2">
+				{shiftData.map((data) => {
+					return (
+						<div className="rounded-xl bg-base-300 p-2">
+							<div className="grid grid-flow-col">
+								<h1 className="label-text text-xl ">{data.dayOfTheWeek}</h1>
+								<p className="grid justify-end">8hr</p>
+							</div>
+
+							<div className="grid grid-flow-col">
+								<p className="label-text grid justify-start font-mono">
+									{data.startTime} - {data.endTime}
+								</p>
+								<p className="label-text grid justify-end font-mono font-semibold">
+									$0.00
+								</p>
+							</div>
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);
