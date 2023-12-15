@@ -5,7 +5,6 @@ export default function SummaryOutput() {
 	const { shiftData, updateShiftData } = useShiftData();
 
 	// const add = () => {};
-
 	return (
 		<div className="w-2/5 bg-base-100 p-4">
 			<h1 className="pb-4 text-3xl font-bold">Summary</h1>
@@ -24,7 +23,7 @@ export default function SummaryOutput() {
 									{data.startTime} - {data.endTime}
 								</p>
 								<p className="label-text grid justify-end font-mono font-semibold">
-									$0.00
+									answer: {}
 								</p>
 							</div>
 						</div>
