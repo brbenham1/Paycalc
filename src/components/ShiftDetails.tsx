@@ -8,7 +8,7 @@ export default function ShiftDetails() {
 					<div className="label">
 						<span className="label-text font-medium">Day of the Week</span>
 					</div>
-					<select className="select bg-primary-300 rounded-lg font-mono">
+					<select className="select select-bordered bg-primary-300 rounded-lg font-mono">
 						<option selected>Monday</option>
 						<option>Tuesday</option>
 						<option>Wednesday</option>
@@ -18,17 +18,40 @@ export default function ShiftDetails() {
 						<option>Sunday</option>
 					</select>
 				</label>
-				<div className="mb-2">
-					<label className="mr-2">Starting Time:</label>
-					<input type="text" name="startTime" />
+
+				<div className="mb-2 grid grid-cols-2 gap-2">
+					<label className="form-control w-full max-w-xs">
+						<div className="label">
+							<span className="label-text font-semibold">Start Time</span>
+						</div>
+						<input
+							type="time"
+							placeholder="Type here"
+							className="input input-bordered w-full max-w-xs rounded-lg"
+						/>
+					</label>
+					<label className="form-control w-full max-w-xs">
+						<div className="label">
+							<span className="label-text font-semibold">End Time</span>
+						</div>
+						<input
+							type="time"
+							className="input input-bordered w-full max-w-xs rounded-lg"
+						/>
+					</label>
 				</div>
-				<div className="mb-2">
-					<label className="mr-2">Finish Time:</label>
-					<input type="text" name="finishTime" />
-				</div>
-				<div className="mb-2">
-					<label className="mr-2">Public Holiday </label>
-					<input type="checkbox" name="publicHoliday" />
+				<p className="divider divider-primary-100 label-text font-medium">
+					Options
+				</p>
+				<div className="mb-2 flex items-center justify-between">
+					<label className="label-text mr-2 font-semibold">
+						Public Holiday{' '}
+					</label>
+					<input
+						className="checkbox checkbox-primary checkbox-sm"
+						type="checkbox"
+						name="publicHoliday"
+					/>
 				</div>
 			</form>
 		</div>

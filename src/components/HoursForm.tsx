@@ -38,7 +38,7 @@ export default function HoursForm() {
 					+ Add Shift
 				</button>
 			</div>
-			<div className="flex flex-wrap justify-center gap-4">
+			<div className="flex flex-col items-center gap-4">
 				{days.map((day) => (
 					<ShiftDetails />
 				))}
