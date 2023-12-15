@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ShiftDetails from './ShiftDetails';
 
-type ShiftDetails = {
+type ShiftInformation = {
 	startTime: string;
 	endTime: string;
 	dayOfTheWeek: string;
@@ -9,14 +9,14 @@ type ShiftDetails = {
 };
 
 export default function HoursForm() {
-	const [days, setDays] = useState<ShiftDetails[]>([]);
+	const [shifts, setShifts] = useState<ShiftInformation[]>([]);
 
 	function addShift() {
-		setDays(
+		setShifts(
 			// Replace the state
 			[
 				// with a new array
-				...days, // that contains all the old items
+				...shifts, // that contains all the old items
 				{
 					startTime: '',
 					endTime: '',
@@ -39,7 +39,7 @@ export default function HoursForm() {
 				</button>
 			</div>
 			<div className="flex flex-col items-center gap-4">
-				{days.map((day) => (
+				{shifts.map((day) => (
 					<ShiftDetails />
 				))}
 			</div>
