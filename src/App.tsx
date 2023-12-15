@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import HoursForm from './components/HoursForm';
 import SummaryOutput from './components/SummaryOutput';
+import { ShiftDataProvider } from './context/ShiftContext';
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
-		<div className="flex w-full bg-green-400">
-			<HoursForm />
-			<SummaryOutput />
-		</div>
+		<ShiftDataProvider>
+			<div className="flex w-full">
+				<HoursForm />
+				<SummaryOutput />
+			</div>
+		</ShiftDataProvider>
 	);
 }
 

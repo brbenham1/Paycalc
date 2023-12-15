@@ -1,7 +1,7 @@
 import React from 'react';
-import { ShiftInformation } from './HoursForm';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ShiftInformation } from '../context/ShiftContext';
 
 const daysOfWeek = [
 	'Monday',

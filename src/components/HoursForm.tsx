@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import ShiftDetails from './ShiftDetails';
-
-export type ShiftInformation = {
-	startTime: string;
-	endTime: string;
-	dayOfTheWeek: string;
-	publicHoliday: boolean;
-};
+import { ShiftInformation, useShiftData } from '../context/ShiftContext';
 
 export default function HoursForm() {
-	const [shifts, setShifts] = useState<ShiftInformation[]>([]);
+	const { shiftData: shifts, updateShiftData: setShifts } = useShiftData();
 
 	function addShift() {
 		setShifts(
