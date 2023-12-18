@@ -102,10 +102,12 @@ export function shiftToPay(shift: ShiftInformation, breaks: number[]): number {
 		0
 	);
 
-	if (dayMinutes > 30 && nightMinutes > 30) {
-		dayMinutes = dayMinutes - totalBreakMinutes;
-	} else {
-		nightMinutes = nightMinutes - totalBreakMinutes;
+	if (dayMinutes + nightMinutes >= 330) {
+		if (dayMinutes > 30 && nightMinutes > 30) {
+			dayMinutes = dayMinutes - totalBreakMinutes;
+		} else {
+			nightMinutes = nightMinutes - totalBreakMinutes;
+		}
 	}
 
 	const dayPay = (dayMinutes / 60) * getDailyRate(shift);
