@@ -29,7 +29,7 @@ export default function SummaryOutput() {
 						<div className="rounded-xl bg-base-300 p-2">
 							<div className="grid grid-flow-col">
 								<h1 className="label-text text-xl ">{data.dayOfTheWeek}</h1>
-								<p className="grid justify-end"> {data.duration} </p>
+								<p className="grid justify-end"> {data.totalDuration} </p>
 							</div>
 
 							<div className="grid grid-flow-col">
