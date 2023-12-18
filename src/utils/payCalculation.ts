@@ -17,13 +17,15 @@ interface TimeDifference {
 	minutes: number;
 }
 
+const minutesToHours = (minutes: number) => Math.floor(minutes / 60);
+
 export function getDerivedShiftInfo(shift: ShiftInformation): DerivedShiftInfo {
-	const { hours, minutes } = getHoursAndMinutesBetween(
-		shift.startTime,
-		shift.endTime
-	);
+	const minutes = getMinutesBetween(shift.startTime, shift.endTime);
+
 	const earnings = shiftToPay(shift);
-	const duration = getDurationString(hours, minutes);
+	const duration = getDurationString(minutes);
+	const hours = minutesToHours(minutes);
+
 	const breaks = [];
 	if (hours > 5) {
 		breaks.push(30);
@@ -47,17 +49,10 @@ export const getRate = (shift: ShiftInformation): number => {
 };
 
 export function shiftToPay(shift: ShiftInformation): number {
-	const { hours, minutes } = getHoursAndMinutesBetween(
-		shift.startTime,
-		shift.endTime
-	);
-
-	const start = timeStringToDate(shift.startTime);
-	const end = timeStringToDate(shift.endTime);
-
+	const minutes = getMinutesBetween(shift.startTime, shift.endTime);
 	const rate = getRate(shift);
 
-	return hours * rate + (minutes / 60) * rate;
+	return (minutes / 60) * rate;
 }
 
 export const timeStringToDate = (time: string): Date => {
@@ -68,27 +63,29 @@ export const timeStringToDate = (time: string): Date => {
 	return new Date(2000, 0, 1, h, m);
 };
 
-export const getHoursAndMinutesBetween = (
+export const getMinutesBetween = (
 	startTime: string,
 	endTime: string
-): TimeDifference => {
+): number => {
 	const start = timeStringToDate(startTime);
 	const end = timeStringToDate(endTime);
 
+	// Increment day by 1 if end date is less than start date
 	if (end <= start) {
 		end.setDate(end.getDate() + 1);
 	}
 
-	const diff = end.getTime() - start.getTime();
-	const hours = Math.floor(diff / (1000 * 60 * 60));
-	const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-	return { hours, minutes };
+	const diffMilliseconds = end.getTime() - start.getTime();
+	return Math.floor(diffMilliseconds / (1000 * 60));
 };
 
 export const calculateTotalPay = (shifts: ShiftInformation[]): number => {
 	return shifts.reduce((acc, shift) => acc + shiftToPay(shift), 0);
 };
 
-export const getDurationString = (hours: number, minutes: number): string => {
+export const getDurationString = (inputMinutes: number): string => {
+	const hours = minutesToHours(inputMinutes);
+	const minutes = inputMinutes % 60;
+
 	return `${hours ? `${hours}hr` : ''}${minutes ? `${minutes}m` : ''}`;
 };
