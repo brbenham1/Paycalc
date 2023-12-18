@@ -65,7 +65,7 @@ export default function ShiftDetails({
 			<form className="p-2">
 				<label className="form-control w-full max-w-xs pb-2">
 					<div className="label">
-						<span className="label-text font-medium">Day of the Week</span>
+						<span className="label-text font-medium">Shift Start</span>
 					</div>
 					<select
 						onChange={(e) => handleSelectChange(e, 'dayOfTheWeek')}

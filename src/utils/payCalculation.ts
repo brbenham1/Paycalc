@@ -4,6 +4,7 @@ const BASE_RATE = parseFloat(import.meta.env.VITE_BASE_RATE);
 const SATURDAY_RATE = parseFloat(import.meta.env.VITE_SATURDAY_RATE);
 const SUNDAY_RATE = parseFloat(import.meta.env.VITE_SUNDAY_RATE);
 const NIGHT_RATE = parseFloat(import.meta.env.VITE_SATURDAY_RATE);
+const OVERTIME_RATE = parseFloat(import.meta.env.VITE_OVERTIME_RATE);
 
 type DerivedShiftInfo = ShiftInformation & {
 	duration: string;
