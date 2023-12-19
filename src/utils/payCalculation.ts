@@ -102,8 +102,11 @@ export function shiftToPay(shift: ShiftInformation, breaks: number[]): number {
 		0
 	);
 
+	// console.log(`Day minutes: ${dayMinutes}`);
+	// console.log(`Night minutes: ${nightMinutes}`);
+
 	if (dayMinutes + nightMinutes >= 330) {
-		if (dayMinutes > 30 && nightMinutes > 30) {
+		if (dayMinutes > 30) {
 			dayMinutes = dayMinutes - totalBreakMinutes;
 		} else {
 			nightMinutes = nightMinutes - totalBreakMinutes;
@@ -112,6 +115,9 @@ export function shiftToPay(shift: ShiftInformation, breaks: number[]): number {
 
 	const dayPay = (dayMinutes / 60) * getDailyRate(shift);
 	const nightPay = (nightMinutes / 60) * getNightlyRate(shift);
+
+	// console.log(`Day pay: ${dayPay}`);
+	// console.log(`Night pay: ${nightPay}`);
 
 	return dayPay + nightPay;
 }
