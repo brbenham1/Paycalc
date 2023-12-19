@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import HoursForm from './components/HoursForm';
 import SummaryOutput from './components/SummaryOutput';
 import { ShiftDataProvider } from './context/ShiftContext';
