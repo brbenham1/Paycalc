@@ -1,10 +1,8 @@
-import React from 'react';
-import { ShiftInformation, useShiftData } from '../context/ShiftContext';
-import ShiftDetails from './ShiftDetails';
+import { useShiftData } from '../context/ShiftContext';
 import { getDerivedShiftInfo } from '../utils/payCalculation';
 
 export default function SummaryOutput() {
-	const { shiftData, updateShiftData } = useShiftData();
+	const { shiftData } = useShiftData();
 
 	// filter out the shifts that don't have all the required data
 	const filteredShiftData = shiftData.filter((shift) => {
